@@ -1,10 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
-P_x = 10
-P_y = 10
+P_x = 6
+P_y = 6
 
 plt.figure(1,figsize=(P_x,P_y))
 number1 = 0
+total_number = 0
 for y in range(1,P_y,1):
     for x in range(1,P_x,1):
         number1 += 1
@@ -72,12 +73,37 @@ for y in range(1,(P_y-1),1):
     for x in range(1,(P_x-1),1):
         plt.plot([x+0.5,x],[y+0.5,y+1], color='black')
         plt.plot([x+0.5,x],[y+0.5,y], color='black')
+        total_number+=1
 #畫黃色方塊的右上右下線段
 for y in range(1,(P_y-1),1):
     for x in range(1,(P_x-1),1):
         plt.plot([x+0.5,x+1],[y+0.5,y], color='black')
         plt.plot([x+0.5,x+1],[y+0.5,y+1], color='black')
 #############
+#線編號
+even_number = []
+odd_number = []
+i = 0
+for count in range(1, total_number*4, 1):
+    if (count % 2) != 0:
+        odd_number.append(count)
+    else:
+        even_number.append(count)
 
+for y in range(1,(P_y-1),1):#畫黃色方塊的左下線段
+    for x in range(1,(P_x-1),1):
+        if i < len(odd_number):
+            plt.text(x+0.2,y+0.2,odd_number[i], color='black')
+            i+=1
+i = 0
+for y in range(1,(P_y-1),1):#畫黃色方塊的右下線段
+    for x in range(1,(P_x-1),1):
+        if i < len(even_number):
+            plt.text(x+0.7,y+0.2,even_number[i], color='black')
+            i+=1
+        else:
+            i = even_number[i-1] + 2
+            plt.text(x+0.7,y+0.2,i, color='black')
+i = 0
 plt.axis("off")
 plt.show()
